@@ -136,8 +136,7 @@ README Documentation      ------      	1h
 
 ➡ Total Time: =9 hours
 
-# MAP VEDIO
-https://github.com/user-attachments/assets/886472f0-e596-4257-9fac-cd72c4ed99e5
+
 
 
 
