@@ -1,0 +1,383 @@
+/* ======================================================
+   GLOBAL VARIABLES
+====================================================== */
+:root {
+  --sidebar-width: 340px;
+}
+
+/* ======================================================
+   RESET
+====================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+  background: #eef2f7;
+}
+
+/* ======================================================
+   APP SHELL
+====================================================== */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+/* ======================================================
+   TOPBAR
+====================================================== */
+.topbar {
+  height: 60px;
+  background-color: #0284c7;
+  color: white;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-chip {
+  background: rgba(255,255,255,0.25);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* ======================================================
+   MAIN LAYOUT
+====================================================== */
+.layout {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 60px);
+  display: flex;
+}
+
+/* ======================================================
+   SIDEBAR
+====================================================== */
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: 100%;
+  padding: 22px;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  z-index: 9999;
+  transition: transform 0.35s ease;
+}
+
+.app-shell.sidebar-closed .sidebar {
+  transform: translateX(calc(var(--sidebar-width) * -1));
+}
+
+.app-shell.sidebar-open .sidebar {
+  transform: translateX(0);
+}
+
+/* ======================================================
+   SECTION HEADINGS (DESIGNED)
+====================================================== */
+.sidebar-section {
+  margin-bottom: 26px;
+}
+
+.sidebar-section h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  color: white;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  letter-spacing: 0.4px;
+  transition: 0.25s ease;
+}
+
+.sidebar-section h3:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+}
+
+/* ======================================================
+   SEARCH BOX (DESIGNED)
+====================================================== */
+.search-box {
+  display: flex;
+  gap: 10px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  transition: 0.25s ease;
+}
+
+.search-box input:focus {
+  border-color: #0284c7;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(2,132,199,0.15);
+  outline: none;
+}
+
+.search-btn {
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+}
+
+/* ======================================================
+   UPLOAD AREA (DESIGNED)
+====================================================== */
+.upload-area {
+  background: #f8fafc;
+  border: 2px dashed #94a3b8;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-area:hover {
+  background: #f1f5f9;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+}
+
+.upload-icon {
+  font-size: 34px;
+  color: #0284c7;
+}
+
+.upload-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.upload-hint {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.upload-area input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* ======================================================
+   BASEMAP CARDS (DESIGNED)
+====================================================== */
+.basemap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.basemap-card {
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-align: center;
+}
+
+.basemap-card:hover {
+  background: #e2f3ff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.basemap-card.active {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  transform: translateY(-4px);
+}
+
+/* ======================================================
+   EXPORT BUTTONS (DESIGNED LIKE SEARCH + BASEMAP)
+====================================================== */
+.export-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.export-btn {
+  width: 100%;
+  padding: 14px 18px;
+
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+
+  font-weight: 600;
+  font-size: 14px;
+  color: #0f172a;
+
+  cursor: pointer;
+  text-align: center;
+
+  transition: 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
+
+.export-btn:hover {
+  background: #e2f3ff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+.export-btn.screenshot {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: white;
+  border-color: transparent;
+}
+
+.export-btn.screenshot:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+  transform: translateY(-3px);
+}
+
+/* ======================================================
+   TOGGLE BUTTON
+====================================================== */
+.sidebar-toggle-fixed {
+  position: absolute;
+  top: 300px;
+  width: 45px;
+  height: 65px;
+
+  background: #0284c7;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: left 0.3s ease, top 0.3s ease, background 0.2s ease;
+  z-index: 10000;
+}
+
+.sidebar-toggle-fixed:hover {
+  background: #0369a1;
+}
+
+.app-shell.sidebar-open .sidebar-toggle-fixed {
+  left: var(--sidebar-width);
+}
+
+.app-shell.sidebar-closed .sidebar-toggle-fixed {
+  left: 0;
+}
+
+/* ======================================================
+   MAP AREA
+====================================================== */
+.map-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease;
+  z-index: 1;
+}
+
+.app-shell.sidebar-open .map-wrapper {
+  transform: translateX(var(--sidebar-width));
+}
+
+.app-shell.sidebar-closed .map-wrapper {
+  transform: translateX(0);
+}
+
+#map, .leaflet-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ======================================================
+   COORDINATES BOX
+====================================================== */
+.coords-box {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+
+  background: rgba(15,23,42,0.85);
+  color: white;
+
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  font-size: 12px;
+  z-index: 50;
+}
+
+/* ======================================================
+   HIDE OPACITY UI (Required)
+====================================================== */
+.opacity-control,
+.opacity-slider,
+.opacity-percent {
+  display: none !important;
+}
