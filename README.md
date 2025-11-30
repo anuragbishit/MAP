@@ -1,4 +1,7 @@
-# 🗺️ Map Library Choic
+
+https://raw.githubusercontent.com/AnuragAnimated/pulse-logo/main/pulse.svg" width="110" />
+<img src="https://readme-typing-svg.demolab.com?font=Segoe+UI&size=28&duration=2600&pause=800&color=0284C7&center=true&vCenter=true&width=650&lines=NRW+AOI+Studio;Interactive+AOI+Creator+%26+Basemap+Viewer;Leaflet+%2B+React+GIS+Application" /> </h1>
+# 🗺️ Map Library Choice
  Selected Library: Leaflet + Leaflet-Draw
 
 (i) Your codebase is built around Leaflet (📁 App.jsx ✔) with features like:
@@ -123,14 +126,14 @@ Before deployment, add:
 
 # ⏱️ Time Stamp
 Task                           	Time
-Map engine & basemap setup     	1.5h
-Sidebar UI & CSS                 	2h
-Shapefile upload system	          1h
-Screenshot engine	                45m
-Draw tools integration          	45m
-Testing	                          1h
-Bug fixes + optimization        	1h
-README Documentation            	1h
+Map engine & basemap setup  ----   	1.5h
+Sidebar UI & CSS      ------        	2h
+Shapefile upload system-   -----------1h
+Screenshot engine	       ---         45m
+Draw tools integration    ----      	45m
+Testing	                 ----         1h
+Bug fixes + optimization  -----      	1h
+README Documentation      ------      	1h
 
 ➡ Total Time: =9 hours
 
