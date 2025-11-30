@@ -106,7 +106,9 @@ Before deployment, add:
 (ii) Replace rasters with vector tiles for huge datasets
 
 (iii) Introduce map-level caching
-![Production Readiness](https://raw.githubusercontent.com/<USER>/<REPO>/main/images/production-readiness.png)
+
+<img width="1024" height="1024" alt="production readlines" src="https://github.com/user-attachments/assets/adb86865-36a9-4622-991d-36aed9cb94c2" />
+
 
 🔧 DevOps
 
@@ -136,5 +138,10 @@ Bug fixes + optimization  -----      	1h
 README Documentation      ------      	1h
 
 ➡ Total Time: =9 hours
+
+# MAP VEDIO
+https://github.com/user-attachments/assets/886472f0-e596-4257-9fac-cd72c4ed99e5
+
+
 
 
