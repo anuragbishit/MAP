@@ -106,6 +106,7 @@ Before deployment, add:
 (ii) Replace rasters with vector tiles for huge datasets
 
 (iii) Introduce map-level caching
+![Production Readiness](https://raw.githubusercontent.com/<USER>/<REPO>/main/images/production-readiness.png)
 
 🔧 DevOps
 
