@@ -7,7 +7,6 @@ import "leaflet-draw";
 import shp from "shpjs";
 import html2canvas from "html2canvas";
 
-/* Fix Leaflet icons */
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -37,9 +36,6 @@ function App() {
   const [selectedBasemap, setSelectedBasemap] = useState("osm");
   const [isUploadActive, setIsUploadActive] = useState(false);
 
-  /* ============================================================
-      INITIALIZE MAP
-  ============================================================= */
   useEffect(() => {
     if (mapRef.current) return;
 
@@ -54,7 +50,6 @@ function App() {
 
     mapRef.current = map;
 
-    /* Basemaps */
     const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{ opacity: 1 });
     const light = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{ opacity: 0 });
     const dark = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{ opacity: 0 });
@@ -65,7 +60,6 @@ function App() {
     osm.addTo(map);
     currentBasemapRef.current = osm;
 
-    /* Preload 16 tiles for basemap switching */
     Object.values(basemapLayersRef.current).forEach((layer) => {
       const preloadZoom = 5;
       for (let x = 0; x < 4; x++) {
@@ -77,7 +71,6 @@ function App() {
       }
     });
 
-    /* DOP Layer */
     dopLayerRef.current = L.tileLayer.wms(
       "https://www.wms.nrw.de/geobasis/wms_nw_dop?",
       {
@@ -89,7 +82,6 @@ function App() {
       }
     );
 
-    /* Drawing Tools */
     const drawn = new L.FeatureGroup();
     drawnItemsRef.current = drawn;
     map.addLayer(drawn);
@@ -111,7 +103,6 @@ function App() {
       setStatus("AOI added");
     });
 
-    /* Coordinates */
     map.on("mousemove", (e) => {
       setCoords({
         lat: e.latlng.lat.toFixed(6),
@@ -126,9 +117,6 @@ function App() {
     setStatus("Map ready");
   }, []);
 
-  /* ============================================================
-      OPACITY
-  ============================================================= */
   const handleOpacityChange = (value) => {
     const v = parseFloat(value);
     setOpacity(v);
@@ -142,9 +130,6 @@ function App() {
     dopLayerRef.current.setOpacity(v);
   };
 
-  /* ============================================================
-      BASEMAP SWITCH
-  ============================================================= */
   const handleBasemapChange = (key) => {
     const newLayer = basemapLayersRef.current[key];
     if (!newLayer || newLayer === currentBasemapRef.current) return;
@@ -161,9 +146,6 @@ function App() {
     setStatus(`Basemap: ${key}`);
   };
 
-  /* ============================================================
-      SEARCH + FAST LOAD
-  ============================================================= */
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
@@ -204,9 +186,6 @@ function App() {
     }
   };
 
-  /* ============================================================
-      SHAPEFILE UPLOAD
-  ============================================================= */
   const handleShapefileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -231,9 +210,6 @@ function App() {
     }
   };
 
-  /* ============================================================
-      EXPORT GEOJSON
-  ============================================================= */
   const exportGeoJSON = () => {
     const fc = drawnItemsRef.current.toGeoJSON();
     const blob = new Blob([JSON.stringify(fc, null, 2)], {
@@ -247,9 +223,6 @@ function App() {
     setStatus("GeoJSON exported");
   };
 
-  /* ============================================================
-      SUPER FAST SCREENSHOT
-  ============================================================= */
   const downloadScreenshot = async () => {
     setStatus("Capturing screenshot...");
 
@@ -286,9 +259,6 @@ function App() {
     mapEl.style.willChange = oldWC;
   };
 
-  /* ============================================================
-      JSX UI
-  ============================================================= */
   return (
     <div className={`app-shell ${sidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>
       <header className="topbar">
@@ -304,10 +274,8 @@ function App() {
           {sidebarOpen ? "◀" : "▶"}
         </button>
 
-        {/* SIDEBAR */}
         <aside className="sidebar">
 
-          {/* SEARCH */}
           <div className="sidebar-section">
             <h3>🔍 Search Location</h3>
             <form className="search-box" onSubmit={handleSearch}>
@@ -321,7 +289,6 @@ function App() {
             </form>
           </div>
 
-          {/* UPLOAD */}
           <div className="sidebar-section">
             <h3>📁 Upload Shapefile</h3>
             <label className={`upload-area ${isUploadActive ? "active" : ""}`}>
@@ -337,7 +304,6 @@ function App() {
             </label>
           </div>
 
-          {/* BASEMAPS */}
           <div className="sidebar-section">
             <h3>🗺️ Basemaps</h3>
             <div className="basemap-grid">
@@ -358,7 +324,6 @@ function App() {
             </div>
           </div>
 
-          {/* EXPORT BUTTONS */}
           <div className="sidebar-section">
             <h3>📤 Export</h3>
 
@@ -375,7 +340,6 @@ function App() {
           </div>
         </aside>
 
-        {/* MAP */}
         <main className="map-wrapper">
           <div ref={mapContainerRef} id="map" />
 
